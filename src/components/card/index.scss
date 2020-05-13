@@ -1,0 +1,22 @@
+.card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 4px rgba(0, 0, 0, .3);
+
+    .svg{
+        svg{
+            fill: #007bbe;
+            width: 32px;
+        }
+    }
+    .name{
+        color: #000;
+        font-size: 1rem;
+        font-weight: 600;
+    }
+}
