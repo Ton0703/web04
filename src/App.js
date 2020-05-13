@@ -4,10 +4,14 @@ import Button from './components/button';
 import News from './components/news';
 import Card from './components/card';
 import Info from './components/info';
+import useOnScreen from './useOnScreen'
+import Lists from './lists'
 
 const logo = <svg t="1589350668877" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7289"><path d="M899.6 117c9.9 7.1 13.8 16.7 12 28.5L797.3 831.2c-1.5 8.6-6.3 15.3-14.3 20.1-4.1 2.3-8.8 3.6-13.8 3.6-3.3 0-6.9-0.8-10.7-2.3L556.3 770 448.2 901.8c-5.4 6.9-12.7 10.2-21.9 10.2-3.8 0-7.1-0.6-9.9-1.8-5.6-2.1-10.2-5.5-13.6-10.5-3.4-4.9-5.2-10.3-5.2-16.3V727.7l385.7-472.8-477.2 413-176.3-72.3c-11-4.1-17-12.3-17.8-24.6-0.6-11.9 4.1-20.7 14.3-26.4L869.1 116c4.5-2.7 9.2-4 14.3-4 6 0 11.4 1.7 16.2 5z" fill="#4280dc" p-id="7290"></path></svg>
 
 function App() {
+  const [setRef, visible] = useOnScreen({threshold: 1})
+  const [setRef2, visible2] = useOnScreen({threshold: 1})
   return (
     <div className="App">
         <header>
@@ -60,9 +64,6 @@ function App() {
                    </li>
                  </ul>
                </div>
-               <div className='btn'>
-                 <Button value='VIEW MORE' />
-               </div>
 
             </div>
 
@@ -70,10 +71,6 @@ function App() {
                <div className='sec2-left'>
                  <div className='title'>
                     <div className='en'>About us</div>
-                    <div className='ch'>关于我们</div>
-                 </div>
-                 <div className='btn'>
-                    <Button value='详情' />
                  </div>
                </div>
                <div className='sec2-right'>
@@ -89,7 +86,7 @@ function App() {
                  Service
                </div>
                <div className='content'>
-                 <div className='pic'>
+                 <div className='pic' ref={setRef} style={{opacity: visible? 1 : 0}}>
                     <img src={require('./img/pexels-photo-1665722.jpeg')} alt='' />
                  </div>
                  <div className='introduction'>
@@ -108,7 +105,7 @@ function App() {
                   />
                    <Button value='详情' />
                  </div>
-                 <div className='pic'>
+                 <div className='pic' ref={setRef2} style={{opacity: visible2? 1 : 0}}>
                     <img src={require('./img/pexels-photo-1755195.jpeg')} alt='' />
                  </div>
                </div>
@@ -118,7 +115,9 @@ function App() {
                 Company
               </div>
               <div className='lists'>
-
+                 {Lists.map((item, index) => (
+                   <Card svg={item.svg} name={item.name} key={index} />
+                 ))}
               </div>
             </div>
             <div className='section-5'>
